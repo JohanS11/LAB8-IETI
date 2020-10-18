@@ -1,3 +1,5 @@
+com/eci/cosw/springbootsecureapi/model/Task.java
+ com.eci.cosw.springbootsecureapi.model.Task
 com/eci/cosw/springbootsecureapi/controller/TaskController.java
  com.eci.cosw.springbootsecureapi.controller.TaskController
 com/eci/cosw/springbootsecureapi/controller/SampleAPIController.java

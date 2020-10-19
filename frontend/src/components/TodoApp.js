@@ -9,7 +9,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
-
+import axios from 'axios';
 
 
 export class TodoApp extends Component {
@@ -178,42 +178,45 @@ export class TodoApp extends Component {
             responsible :''
         }));
         this.handleOpen();
-        this.handleFiltering();
         
     }
 
     componentDidMount() {
         
-        fetch('https://taskplanner11.azurewebsites.net/api/add-task?code=IRli1suo1CLj1VUGkfKp7UUZWiVuvlnrN1KM8Hcn78tNKPMUhk2Fqw==')
-            .then(response => response.json())
-            .then(data => {
-                console.log("dataaaa");
-                console.log(data);
-                this.setState({items:data})
+        axios.get('https://lit-woodland-44812.herokuapp.com/api', 
+        {
+            headers: { 
+                    "Content-Type": "application/json"
+            
+                    }
+        })
+         .then(response => { 
+            this.setState({
+                items: response.data
             });
+         })
+         .catch(e => {    
+            console.log(e);             
+            alert("An error has ocurred");
 
-           
+         });            
     }
 
-    addTask = (task) => {
-        fetch("https://taskplanner11.azurewebsites.net/api/add-task?code=IRli1suo1CLj1VUGkfKp7UUZWiVuvlnrN1KM8Hcn78tNKPMUhk2Fqw==", 
-          {method: "POST",
-             body: JSON.stringify(task),
-             headers: {
-                "Content-Type": "application/json"
-              }
+        addTask = (task) => {
+            axios.post('http://localhost:8080/api', 
+            task,
+            {
+                headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
             })
-            .then(response => response.text())
-            .then((data) => {                
-              this.componentDidMount();
-              window.location.href = "/todo"            
-            })
-            .catch(e => {
-                console.log("Errors");
-                console.log(e);
+             .then(response => { 
+                this.componentDidMount();  
+             })
+             .catch(error => {    
+                console.log(error)
                 alert("An error has occurred!");
-            });
+             });        
     }
-
 }
-

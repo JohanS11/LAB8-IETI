@@ -22,18 +22,18 @@ class App extends Component {
 
             <Router>
                 <Switch>
-                    <Route path="/"
+                    <Route  path="/"
                     component={Login} exact> </Route>
                     
-                    <Route path="/signup"
+                    <Route  path="/signup"
                     component={SignUp} exact> </Route>
 
-                    <Route path="/todo"
+                    <Route  path="/todo"
                         component={Drawer} exact> </Route>
 
                     <Route path="/logout" render={()=>{
                         localStorage.clear();
-                        return <Redirect to="/"></Redirect>;
+                        this.props.history.push("/");
                         }} exact />
                 </Switch>
             

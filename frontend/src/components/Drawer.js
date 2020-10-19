@@ -70,13 +70,12 @@ function ResponsiveDrawer(props) {
   };
 
   const handlerLogout = (e) => {
-    localStorage.setItem("IsLoggedIn",false);
-    localStorage.removeItem("IsLoggedIn");
+    localStorage.removeItem("token");
     handleDrawerToggle();
   }
 
-  if (!localStorage.getItem("IsLoggedIn")){
-    return <Login/>
+  if (!localStorage.getItem("token")){
+    return <Redirect to="/" />
   }
   
   const drawer = (

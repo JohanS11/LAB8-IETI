@@ -4,11 +4,11 @@ public class Task {
 
     private int id;
     private String text;
-    private User responsible;
+    private String responsible;
     private String dueDate;
     private String status;
 
-    public Task(String text, User responsible, String dueDate, String status) {
+    public Task(String text, String responsible, String dueDate, String status) {
         this.text = text;
         this.responsible = responsible;
         this.dueDate = dueDate;
@@ -31,11 +31,11 @@ public class Task {
         this.text = text;
     }
 
-    public User getResponsible() {
+    public String getResponsible() {
         return responsible;
     }
 
-    public void setResponsible(User responsible) {
+    public void setResponsible(String responsible) {
         this.responsible = responsible;
     }
 

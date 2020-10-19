@@ -12,16 +12,13 @@ import './Login.css'
 import { TodoApp } from './TodoApp';
 import Drawer from './Drawer';
 import { Redirect, Link, withRouter } from 'react-router-dom';
-import Axios from 'axios';
-
-
+import axios from 'axios';
 
 export class Login extends React.Component{
 
     constructor(props) {
         super(props);
-        console.log("WHYYY")
-        console.log(this.props);
+        
         this.state = {email:"", password:"",IsLoggedIn: false};
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
         this.handleChangePasswd = this.handleChangePasswd.bind(this);
@@ -41,48 +38,30 @@ export class Login extends React.Component{
     }
 
     handleSend() {
-        if(localStorage.getItem("users")==null){
-            localStorage.setItem("users",JSON.stringify([{"username":"chan","email":"chan@mail.com","password":"chan123"}]));
-        } 
-        console.log("GOLAAAA");
-        console.log(localStorage.getItem("users"));
-        var listUsers = JSON.parse(localStorage.getItem("users"));
-        console.log("USERSSSSS");
-        console.log(listUsers);
-        console.log("THISS11111");
-        console.log(this.props);
-        var logged = false;
-        for (var i = 0; i < listUsers.length; i++){
-            if (listUsers[i].email == this.state.email && listUsers[i].password == this.state.password ){
-                localStorage.setItem("IsLoggedIn",true);
-                localStorage.setItem("username",listUsers[i].username);
-                localStorage.setItem("email",listUsers[i].email);
-                logged = true;
-                
-            }
-        }
-        if (!logged){
-            alert("Incorrect User or password ")
-        }else {
-            window.location.href = "/todo";
-        }
         
+        console.log(this.state.email);
+        console.log(this.state.password);
+        axios.post('https://lit-woodland-44812.herokuapp.com/user/login', {
+            email: this.state.email,
+            password: this.state.password
+           },
+           {headers:{"Content-ype":"application/json"}})
+            .then(response => {
+                console.log(response.data);
+                localStorage.setItem('token',response.data.accessToken);
+                localStorage.setItem("IsLoggedIn",true);
+                localStorage.setItem("username","test");
+                localStorage.setItem("email",this.state.email);
+                this.props.history.push("/todo");
+                return;
+            })
+            .catch( error => {
+                console.log(error);
+                this.props.history.push("/");
+                alert("Invalid username or password")
+            });   
     }
 
-    componentDidMount() {
-        
-        Axios.post('https://lit-woodland-44812.herokuapp.com/user/login', {
-             username: this.state.username,
-             password: this.state.password
-         })
-             .then(function (response) {
-                 console.log(response.data.token);
-                 localStorage.setItem('token',response.data.token)
-             })
-             .catch(function (error) {
-                 console.log(error);
-             });
-    }
     
     render(){
     
@@ -142,3 +121,5 @@ export class Login extends React.Component{
     }
 
 }
+
+export default withRouter(Login);

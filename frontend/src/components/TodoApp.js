@@ -186,8 +186,8 @@ export class TodoApp extends Component {
         axios.get('https://lit-woodland-44812.herokuapp.com/api', 
         {
             headers: { 
-                    "Content-Type": "application/json"
-            
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token")
                     }
         })
          .then(response => { 
@@ -203,7 +203,7 @@ export class TodoApp extends Component {
     }
 
         addTask = (task) => {
-            axios.post('http://localhost:8080/api', 
+            axios.post('https://lit-woodland-44812.herokuapp.com/api', 
             task,
             {
                 headers: { 

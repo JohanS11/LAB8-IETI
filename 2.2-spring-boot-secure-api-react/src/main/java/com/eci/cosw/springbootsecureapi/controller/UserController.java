@@ -46,7 +46,7 @@ public class UserController
             throw new ServletException( "User username not found." );
         }
 
-        String usr = user.getUsername();
+        String usr = user.getEmail();
 
         String pwd = user.getPassword();
 

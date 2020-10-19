@@ -10,7 +10,6 @@ password : password
 
 **Note:** In order to add a new task just hit the "+" bottom, once you have logged in successfully
 
-This app was deployed in azure 
 
 **NodeJS Backend App**
 

@@ -42,7 +42,7 @@ public class JwtFilter
             if ( authHeader == null || !authHeader.startsWith( "Bearer " ) )
             {
                 response.setStatus(403);
-                response.getOutputStream().print("<h2> Insufficient Permissions </h2>");
+                response.getOutputStream().print("Insufficient Permissions");
                 return;
             }
 

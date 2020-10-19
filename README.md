@@ -1,5 +1,29 @@
 # 2.2 Spring Boot Secure API
 
+## Description
+
+**User credentials**
+
+email : test@mail.com
+
+password : password
+
+**Note:** In order to add a new task just hit the "+" bottom, once you have logged in successfully
+
+This app was deployed in azure 
+
+**NodeJS Backend App**
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://taskplanner11.azurewebsites.net/api/add-task?code=IRli1suo1CLj1VUGkfKp7UUZWiVuvlnrN1KM8Hcn78tNKPMUhk2Fqw==)
+
+**Java 8 Backend App**
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lit-woodland-44812.herokuapp.com/api)
+
+**ReactJS Frontend App**
+
+[![firebase](https://cdn4.iconfinder.com/data/icons/google-i-o-2016/512/google_firebase-2-128.png)](https://lab7ieti.web.app/)
+
 **Goals**
 
 * Implement a secure API using the JSON Web Token open standard (RFC 7519). 
